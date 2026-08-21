@@ -1,0 +1,27 @@
+{
+  "name": "agama-doc-validator",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Validator for Agama JSON profiles in the official SUSE documentation",
+  "main": "dist/index.js",
+  "bin": {
+    "agama-doc-validator": "./agama-doc-validator.ts"
+  },
+  "scripts": {
+    "start": "tsx src/agama-doc-validator.ts",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@apideck/better-ajv-errors": "^0.3.7",
+    "ajv": "^8.12.0",
+    "commander": "^12.0.0",
+    "picocolors": "^1.0.0",
+    "sax": "^1.4.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/sax": "^1.2.7",
+    "tsx": "^4.7.0",
+    "typescript": "^5.0.0"
+  }
+}
