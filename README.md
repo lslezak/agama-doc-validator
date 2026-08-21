@@ -13,7 +13,7 @@ This tool is particularly useful for ensuring that documentation examples contai
 
 ## Prerequisites
 
-- Node.js (v18 or higher recommended)
+- Node.js (v22 or higher recommended)
 - `npm` (comes with Node.js)
 
 ## Installation & Build
