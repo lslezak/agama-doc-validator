@@ -13,6 +13,10 @@ inputs:
       "SLE-16.0", "SLE-16.1", or any Agama Git branch name, or a full URL.'
     default: latest
 
+  verbose:
+    description: Display verbose output while processing the input files.
+    default: "false"
+
 runs:
   using: node24
   main: dist/index.js

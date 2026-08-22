@@ -10,7 +10,14 @@ export async function runValidator(
   verbose: boolean,
   all: boolean = false,
 ) {
-  
+  if (verbose) {
+    console.log(pc.gray("Validation options:"));
+    console.log(pc.gray(`  Verbose: ${verbose}`));
+    console.log(pc.gray(`  Path:    ${input}`));
+    console.log(pc.gray(`  Schema:  ${schemaRef}`));
+    console.log(pc.gray(`  All:     ${all}\n`));
+  }
+
   const xmlFiles = findXmlFiles(input);
   
   if (xmlFiles.length === 0) {
@@ -74,15 +81,13 @@ export async function runValidator(
     process.exit(1);
   } else {
     if (totalJsons === 0) {
-      console.log(pc.green("ℹ️  No Agama JSON profiles found."));
+      console.log(pc.yellowBright("ℹ️  No Agama JSON profiles found."));
     } else {
       console.log(
         pc.green(
-          "✅ Validation complete. All JSON profiles are well-formed and schema-compliant!",
+          "✅ Validation complete, all JSON profiles are well-formed and schema-compliant.",
         ),
       );
     }
-
-    process.exit(0);
   }
 }
