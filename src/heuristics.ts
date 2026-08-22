@@ -22,7 +22,7 @@ export function analyzeSnippet(text: string, forceJson: boolean = false): Heuris
       // shell command
       "&prompt",
       // XML snippet
-      "</",
+      "</"
     ];
 
     // skip if the input contains any of the "exclude" texts

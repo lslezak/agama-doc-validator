@@ -35,7 +35,7 @@ export class Validator {
       const betterErrors = betterAjvErrors({
         schema: this.schema,
         data,
-        errors: this.validateFn.errors,
+        errors: this.validateFn.errors
       });
       return betterErrors.map((err) => err.message);
     } catch (e) {

@@ -1,5 +1,5 @@
-import * as fs from 'fs';
-import * as sax from 'sax';
+import * as fs from "fs";
+import * as sax from "sax";
 
 export interface ScreenSnippet {
   file: string;
@@ -9,20 +9,20 @@ export interface ScreenSnippet {
 
 export function extractScreenSnippets(filePath: string, all: boolean = false): ScreenSnippet[] {
   const snippets: ScreenSnippet[] = [];
-  const content = fs.readFileSync(filePath, 'utf-8');
+  const content = fs.readFileSync(filePath, "utf-8");
 
   // Using non-strict mode to avoid crashing on DocBook custom entities (e.g. &prompt.sudo;)
   const parser = sax.parser(false, { lowercase: true });
   let inScreen = false;
-  let currentText = '';
+  let currentText = "";
   let startLine = 0;
 
   parser.onopentag = (node) => {
-    if (node.name === 'screen') {
-      const isAgamaJson = (node.attributes as any)?.language === 'agama-json';
+    if (node.name === "screen") {
+      const isAgamaJson = (node.attributes as any)?.language === "agama-json";
       if (all || isAgamaJson) {
         inScreen = true;
-        currentText = '';
+        currentText = "";
         startLine = parser.line;
       }
     }
@@ -30,20 +30,20 @@ export function extractScreenSnippets(filePath: string, all: boolean = false): S
 
   parser.ontext = (text) => {
     if (inScreen) {
-      // TODO: what about the XML entities, replace them? 
+      // TODO: what about the XML entities, replace them?
       // currentText += text.replace(/&[a-zA-Z0-9_.-]+;/g, '"__ENTITY__"');
       currentText += text;
     }
   };
 
   parser.onclosetag = (name) => {
-    if (name === 'screen' && inScreen) {
+    if (name === "screen" && inScreen) {
       inScreen = false;
 
       snippets.push({
         file: filePath,
         line: startLine + 1, // sax parser lines are 0-indexed
-        text: currentText,
+        text: currentText
       });
     }
   };

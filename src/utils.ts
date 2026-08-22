@@ -34,12 +34,10 @@ const ALIASES: Record<string, string> = {
   latest:
     "https://raw.githubusercontent.com/agama-project/agama/refs/heads/master/rust/share/profile.schema.json",
   "SLE-16.0":
-    "https://raw.githubusercontent.com/agama-project/agama/refs/heads/SLE-16/rust/agama-lib/share/profile.schema.json",
+    "https://raw.githubusercontent.com/agama-project/agama/refs/heads/SLE-16/rust/agama-lib/share/profile.schema.json"
 };
 
-export async function loadSchema(
-  schemaRef: string,
-): Promise<SchemaDefinition[]> {
+export async function loadSchema(schemaRef: string): Promise<SchemaDefinition[]> {
   // explicit URL
   if (schemaRef.startsWith("http://") || schemaRef.startsWith("https://")) {
     return await fetchSchema(schemaRef);
@@ -66,8 +64,8 @@ async function loadLocalSchema(filePath: string): Promise<SchemaDefinition[]> {
   const result: SchemaDefinition[] = [
     {
       uri: absolutePath,
-      schema: json,
-    },
+      schema: json
+    }
   ];
 
   async function findReferences(data: Schema) {
@@ -99,8 +97,7 @@ async function fetchSchema(url: string): Promise<SchemaDefinition[]> {
   console.log(`Downloading ${url}...`);
 
   const response = await fetch(url);
-  if (!response.ok)
-    throw new Error(`Failed to fetch schema ${url}: ${response.statusText}`);
+  if (!response.ok) throw new Error(`Failed to fetch schema ${url}: ${response.statusText}`);
 
   const json = await response.json();
   delete json.$schema;
@@ -108,8 +105,8 @@ async function fetchSchema(url: string): Promise<SchemaDefinition[]> {
   const result: SchemaDefinition[] = [
     {
       uri: url,
-      schema: json,
-    },
+      schema: json
+    }
   ];
 
   async function findReferences(data: Schema) {

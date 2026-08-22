@@ -8,7 +8,7 @@ export async function runValidator(
   input: string,
   schemaRef: string,
   verbose: boolean,
-  all: boolean = false,
+  all: boolean = false
 ) {
   if (verbose) {
     console.log(pc.gray("Validation options:"));
@@ -19,12 +19,12 @@ export async function runValidator(
   }
 
   const xmlFiles = findXmlFiles(input);
-  
+
   if (xmlFiles.length === 0) {
     console.log(pc.red("❌ No XML file found."));
     process.exit(1);
   }
-  
+
   console.log(pc.cyan(`Loading schema "${schemaRef}"...`));
   const schema = await loadSchema(schemaRef);
   const validator = new Validator(schema);
@@ -41,8 +41,7 @@ export async function runValidator(
     totalScreens += snippets.length;
 
     for (const snippet of snippets) {
-      if (verbose)
-        console.log(pc.gray(`  Found <screen> tag at line ${snippet.line}`));
+      if (verbose) console.log(pc.gray(`  Found <screen> tag at line ${snippet.line}`));
       const result = analyzeSnippet(snippet.text, !all);
 
       if (result.isJson) {
@@ -50,14 +49,14 @@ export async function runValidator(
         if (result.error) {
           if (verbose) console.log(pc.red(`    -> Malformed JSON`));
           errors.push(
-            `MALFORMED JSON\n   File: ${snippet.file}\n   Line: ${snippet.line}\n   Details: ${result.error}`,
+            `MALFORMED JSON\n   File: ${snippet.file}\n   Line: ${snippet.line}\n   Details: ${result.error}`
           );
         } else {
           const validationErrors = validator.validate(result.parsed);
           if (validationErrors.length > 0) {
             if (verbose) console.log(pc.red(`    -> Schema Violation`));
             errors.push(
-              `SCHEMA VIOLATION\n   File: ${snippet.file}\n   Line: ${snippet.line}\n   Details: ${validationErrors.join("; ")}`,
+              `SCHEMA VIOLATION\n   File: ${snippet.file}\n   Line: ${snippet.line}\n   Details: ${validationErrors.join("; ")}`
             );
           } else if (verbose) {
             console.log(pc.green(`    -> Valid JSON & Compliant`));
@@ -84,9 +83,7 @@ export async function runValidator(
       console.log(pc.yellowBright("ℹ️  No Agama JSON profiles found."));
     } else {
       console.log(
-        pc.green(
-          "✅ Validation complete, all JSON profiles are well-formed and schema-compliant.",
-        ),
+        pc.green("✅ Validation complete, all JSON profiles are well-formed and schema-compliant.")
       );
     }
   }

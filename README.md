@@ -1,14 +1,19 @@
 # Agama Doc Validator
 
-The **Agama Doc Validator** is a CLI tool designed to scan DocBook XML files, automatically identify JSON snippets within `<screen>` tags, and validate them against an Agama Profile JSON Schema.
+The **Agama Doc Validator** is a CLI tool designed to scan DocBook XML files, automatically identify
+JSON snippets within `<screen>` tags, and validate them against an Agama Profile JSON Schema.
 
-This tool is particularly useful for ensuring that documentation examples containing Agama profiles are syntactically correct and adhere to the latest schema definitions.
+This tool is particularly useful for ensuring that documentation examples containing Agama profiles
+are syntactically correct and adhere to the latest schema definitions.
 
 ## Features
 
-- **Fast SAX Parsing**: Safely extracts `<screen>` content from DocBook XML files without crashing on unexpanded entities.
-- **Smart Heuristics Engine**: Automatically detects if a snippet inside a `<screen>` tag is a JSON object or array. It even handles partial JSON fragments.
-- **Schema Validation**: Validates the extracted JSON against a provided JSON Schema (supports local files, URLs, or predefined aliases).
+- **Fast SAX Parsing**: Safely extracts `<screen>` content from DocBook XML files without crashing
+  on unexpanded entities.
+- **Smart Heuristics Engine**: Automatically detects if a snippet inside a `<screen>` tag is a JSON
+  object or array. It even handles partial JSON fragments.
+- **Schema Validation**: Validates the extracted JSON against a provided JSON Schema (supports local
+  files, URLs, or predefined aliases).
 - **Clear Reporting**: Outputs detailed file names, line numbers, and exact validation errors.
 
 ## Prerequisites
@@ -33,7 +38,8 @@ This tool is particularly useful for ensuring that documentation examples contai
 
 ## Usage
 
-You can run the tool directly using `npm start` (which uses `tsx` to run the TypeScript file) or by executing the compiled binary.
+You can run the tool directly using `npm start` (which uses `tsx` to run the TypeScript file) or by
+executing the compiled binary.
 
 ```bash
 # Using npm start (pass arguments after --)
@@ -54,17 +60,20 @@ node dist/agama-doc-validator.js -i <path> -s <schema>
 ### Schema Aliases
 
 The tool comes with predefined aliases for quick validation against official Agama schemas:
+
 - `SLE-16.1` : Fetches the profile schema from the SLE-16.1 branch.
 - `latest` : Fetches the profile schema from the master branch.
 
 ### Examples
 
 1. **Scan a single directory using the `latest` alias:**
+
    ```bash
    npm start -- -i ../tasks -s latest
    ```
 
 2. **Scan a specific XML file with verbose output:**
+
    ```bash
    npm start -- -i ../tasks/selinux-policy-containers.xml -s SLE-16.1 -v
    ```
@@ -73,4 +82,3 @@ The tool comes with predefined aliases for quick validation against official Aga
    ```bash
    npm start -- -i ../concepts -s ./my-local-schema.json
    ```
-   

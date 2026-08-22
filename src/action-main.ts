@@ -10,7 +10,7 @@ export async function run(): Promise<void> {
     return runValidator(
       core.getInput("input"),
       core.getInput("schema"),
-      core.getBooleanInput("verbose"),
+      core.getBooleanInput("verbose")
     );
   } catch (error: any) {
     core.setFailed(error.message);
