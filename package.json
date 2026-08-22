@@ -8,14 +8,14 @@
   },
   "scripts": {
     "start": "tsx src/agama-doc-validator.ts",
-    "build": "rm -rf ./build && npx tsc",
     "eslint": "npx eslint .",
     "eslint:fix": "npx eslint --fix .",
     "package": "rm -rf ./dist && npx ncc build -m src/action.ts -o dist",
     "bundle": "rm -rf ./bundle && npx ncc build -m src/agama-doc-validator.ts -o bundle",
     "format:write": "npx prettier --write .",
     "format:check": "npx prettier --check .",
-    "markdownlint": "npx markdownlint-cli2 '**/*.md' '#node_modules'"
+    "markdownlint": "npx markdownlint-cli2 '**/*.md' '#node_modules'",
+    "all": "npm run format:check && npm run eslint && npm run markdownlint && npm run package"
   },
   "dependencies": {
     "@apideck/better-ajv-errors": "^0.3.7",

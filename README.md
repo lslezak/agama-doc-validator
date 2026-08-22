@@ -32,26 +32,16 @@ are syntactically correct and adhere to the latest schema definitions.
 2. Install dependencies:
 
    ```bash
-   npm install
-   ```
-
-3. Build the project (compiles TypeScript to JavaScript):
-
-   ```bash
-   npm run build
+   npm ci
    ```
 
 ## Usage
 
-You can run the tool directly using `npm start` (which uses `tsx` to run the TypeScript file) or by
-executing the compiled binary.
+You can run the tool directly using `npm start` (which uses `tsx` to run the TypeScript file).
 
 ```bash
 # Using npm start (pass arguments after --)
-npm start -- -i -i <path> -s <schema>
-
-# OR using the compiled output
-node dist/agama-doc-validator.js -i <path> -s <schema>
+npm start -- -i <path> -s <schema>
 ```
 
 ### CLI Options
@@ -66,25 +56,5 @@ node dist/agama-doc-validator.js -i <path> -s <schema>
 
 The tool comes with predefined aliases for quick validation against official Agama schemas:
 
-- `SLE-16.1` : Fetches the profile schema from the SLE-16.1 branch.
 - `latest` : Fetches the profile schema from the master branch.
-
-### Examples
-
-1. **Scan a single directory using the `latest` alias:**
-
-   ```bash
-   npm start -- -i ../tasks -s latest
-   ```
-
-2. **Scan a specific XML file with verbose output:**
-
-   ```bash
-   npm start -- -i ../tasks/selinux-policy-containers.xml -s SLE-16.1 -v
-   ```
-
-3. **Validate using a local schema file:**
-
-   ```bash
-   npm start -- -i ../concepts -s ./my-local-schema.json
-   ```
+- `SLE-16.1` : Fetches the profile schema from the SLE-16.1 branch.
