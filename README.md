@@ -24,14 +24,19 @@ are syntactically correct and adhere to the latest schema definitions.
 ## Installation & Build
 
 1. Navigate to the tool directory:
+
    ```bash
    cd agama-doc-validator
    ```
+
 2. Install dependencies:
+
    ```bash
    npm install
    ```
+
 3. Build the project (compiles TypeScript to JavaScript):
+
    ```bash
    npm run build
    ```
@@ -79,6 +84,7 @@ The tool comes with predefined aliases for quick validation against official Aga
    ```
 
 3. **Validate using a local schema file:**
+
    ```bash
    npm start -- -i ../concepts -s ./my-local-schema.json
    ```
