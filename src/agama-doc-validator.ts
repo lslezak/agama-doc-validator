@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
 import { Command } from "commander";
-import { runValidator } from "./runner";
+import { runValidator } from "./runner.js";
 import pc from "picocolors";
-import * as pkg from "../package.json";
+import pkg from "../package.json" with { type: "json" };
 
 const program = new Command();
 

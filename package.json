@@ -6,6 +6,7 @@
   "bin": {
     "agama-doc-validator": "./src/agama-doc-validator.ts"
   },
+  "type": "module",
   "scripts": {
     "start": "tsx src/agama-doc-validator.ts",
     "eslint": "npx eslint .",

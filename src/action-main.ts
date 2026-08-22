@@ -1,5 +1,5 @@
 import * as core from "@actions/core";
-import { runValidator } from "./runner";
+import { runValidator } from "./runner.js";
 
 /**
  * This file is the actual logic of the action

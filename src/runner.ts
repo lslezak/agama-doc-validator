@@ -1,8 +1,8 @@
 import pc from "picocolors";
-import { findXmlFiles, loadSchema } from "./utils";
-import { extractScreenSnippets } from "./parser";
-import { analyzeSnippet } from "./heuristics";
-import { Validator } from "./validator";
+import { findXmlFiles, loadSchema } from "./utils.js";
+import { extractScreenSnippets } from "./parser.js";
+import { analyzeSnippet } from "./heuristics.js";
+import { Validator } from "./validator.js";
 
 export async function runValidator(
   input: string,

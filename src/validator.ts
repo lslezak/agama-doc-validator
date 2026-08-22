@@ -1,7 +1,7 @@
-import Ajv from "ajv";
+import { Ajv } from "ajv";
 import { betterAjvErrors } from "@apideck/better-ajv-errors";
 
-import { SchemaDefinition } from "./utils";
+import { SchemaDefinition } from "./utils.js";
 
 export class Validator {
   private ajv: Ajv;
