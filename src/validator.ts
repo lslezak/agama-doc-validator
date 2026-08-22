@@ -38,6 +38,7 @@ export class Validator {
         errors: this.validateFn.errors
       });
       return betterErrors.map((err) => err.message);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (e) {
       return (this.validateFn.errors || []).map((err: any) => {
         const path = err.instancePath ? `${err.instancePath}: ` : "";

@@ -1,5 +1,6 @@
 import * as fs from "fs";
 import * as sax from "sax";
+import pc from "picocolors";
 
 export interface ScreenSnippet {
   file: string;
@@ -50,8 +51,9 @@ export function extractScreenSnippets(filePath: string, all: boolean = false): S
 
   try {
     parser.write(content).close();
-  } catch (e) {
-    // Silently continue if the parser crashes to extract as much as possible
+  } catch (error: any) {
+    // Continue if the parser crashes to check all files
+    console.log(pc.yellowBright(`WARNING: parsing ${filePath} failed: ${error?.message}`));
   }
 
   return snippets;
