@@ -1,0 +1,18 @@
+name: Validate Agama JSON profiles
+description: Extract the examples of the Agama autoinstallation profiles
+  from the documentation and validate them against the Agama JSON schema.
+
+inputs:
+  path:
+    description: Path to the documentation file. If a directory is used all
+      XML files in the directory and subdirectories will be processed.
+    default: "."
+  
+  schema:
+    description: 'The version of the Agama JSON schema to use. Can be "latest",
+      "SLE-16.0", "SLE-16.1", or any Agama Git branch name, or a full URL.'
+    default: latest
+
+runs:
+  using: node24
+  main: dist/index.js

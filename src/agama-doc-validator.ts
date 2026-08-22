@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { Command } from 'commander';
-import { runValidator } from './index';
+import { runValidator } from './runner';
 import pc from 'picocolors';
 import * as pkg from '../package.json';
 
@@ -13,7 +13,7 @@ program
   .version(pkg.version)
   .helpOption('-h, --help', 'display this help')
   .option('-i, --input <path>', 'path to the DocBook XML file or directory to scan', ".")
-  .option('-s, --schema <path|url|alias>', 'path, URL, or predefined alias to the target JSON Schema (e.g., "SLE-16.1", or "latest")', "latest")
+  .option('-s, --schema <path|url|alias>', 'path, URL, or predefined alias to the target JSON Schema (e.g., "SLE-16.0", or "latest")', "latest")
   .option('-v, --verbose', 'print more information while processing the files')
   .option('-a, --all', 'scan and validate all <screen> tags (by default, only tags with language="agama-json" are validated)')
   .action(async (options) => {
