@@ -1,0 +1,64 @@
+# The built action code is committed in the Git so it can used by other GitHub
+# repositories. This check ensures that the built file matches the source code
+# and the included dependencies.
+name: Check Transpiled JavaScript
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  check-dist:
+    name: Check dist/
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: "24.x"
+          cache: npm
+
+      - name: Remove dist/ Directory
+        run: rm -rf ./dist
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build dist/ Directory
+        run: npm run bundle
+
+      # This will fail the workflow if the `dist/` directory is different than
+      # expected.
+      - name: Check the built file
+        id: diff
+        run: |
+          if [ ! -d dist/ ]; then
+            echo "Expected dist/ directory does not exist!"
+            ls -la ./
+            exit 1
+          fi
+          if [ "$(git diff --ignore-space-at-eol --text dist/ | wc -l)" -gt "0" ]; then
+            echo "ERROR: The built file is different than the file in the repository."
+            echo "run 'npm ci && npm run package' and commit the updated file."
+            exit 1
+          fi
+
+      # If `dist/` was different than expected, upload the expected version as a
+      # workflow artifact.
+      - if: ${{ failure() && steps.diff.outcome == 'failure' }}
+        name: Upload Artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: dist
+          path: dist/
