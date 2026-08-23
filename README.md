@@ -79,3 +79,13 @@ The tool comes with predefined aliases for quick validation against official Aga
 - `SLE-16.0` : Fetches the Agama profile for the SLE-16.0 and openSUSE Leap 16.0 product
 
 Other aliases are mapped to the Agama GitHub repository branches.
+
+## Development
+
+### Updating the built script
+
+After doing any change in the code or after updating the dependencies you need to rebuild the
+content of the `dist/` directory, simply run `npm run package`.
+
+To ensure you do not forget doing this the `npm install` call installs a Git pre-push hook which
+checks that everything is OK.

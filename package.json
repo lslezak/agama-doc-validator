@@ -13,6 +13,7 @@
     "eslint:fix": "npx eslint --fix .",
     "package": "rm -rf ./dist && npx ncc build -m src/action.ts -o dist",
     "bundle": "rm -rf ./bundle && npx ncc build -m src/agama-doc-validator.ts -o bundle",
+    "prepare": "git config core.hooksPath .githooks || true",
     "format:write": "npx prettier --write .",
     "format:check": "npx prettier --check .",
     "markdownlint": "npx markdownlint-cli2 '**/*.md' '#node_modules'",

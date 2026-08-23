@@ -1,0 +1,27 @@
+#!/bin/sh
+
+echo "Running pre-push checks..."
+
+# 1. Run linting, formatting, and build pipelines
+echo "Running 'npm run all'..."
+npm run all
+if [ $? -ne 0 ]; then
+  echo "❌ Error: 'npm run all' failed. Push aborted."
+  exit 1
+fi
+
+# 2. Ensure dist/ contains no uncommitted or untracked changes
+if [ -n "$(git status --porcelain dist/)" ]; then
+  echo "❌ Error: The 'dist/' directory contains uncommitted or untracked changes."
+  echo "Please run 'npm run package', commit the updated 'dist/' folder, and then push again."
+  exit 1
+fi
+
+if [ -t 1 ]; then
+  printf "\033[0;32m✅ Pre-push checks passed successfully.\033[0m\n"
+else
+  echo "✅ Pre-push checks passed successfully."
+fi
+echo
+
+exit 0
