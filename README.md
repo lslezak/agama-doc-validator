@@ -1,5 +1,8 @@
 # Agama Doc Validator
 
+[![Continuous Integration](https://github.com/lslezak/agama-doc-validator/actions/workflows/ci.yml/badge.svg)](https://github.com/lslezak/agama-doc-validator/actions/workflows/ci.yml)
+[![Check Transpiled JavaScript](https://github.com/lslezak/agama-doc-validator/actions/workflows/check-dist.yml/badge.svg)](https://github.com/lslezak/agama-doc-validator/actions/workflows/check-dist.yml)
+
 The **Agama Doc Validator** is a CLI tool designed to scan DocBook XML files, automatically identify
 JSON snippets within `<screen>` tags, and validate them against an Agama Profile JSON Schema.
 
