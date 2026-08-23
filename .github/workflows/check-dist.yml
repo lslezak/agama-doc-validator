@@ -1,15 +1,20 @@
-# The built action code is committed in the Git so it can used by other GitHub
-# repositories. This check ensures that the built file matches the source code
-# and the included dependencies.
-name: Check Transpiled JavaScript
+# The built action code is committed in the Git so it can be used by other
+# GitHub repositories. This check ensures that the built file matches the source
+# code and the included dependencies.
+name: Check dist/ is up to date
 
 on:
-  pull_request:
-    branches:
-      - main
   push:
     branches:
       - main
+    paths-ignore:
+      - "**.md"
+
+  pull_request:
+    paths-ignore:
+      - "**.md"
+
+  workflow_dispatch:
 
 permissions:
   contents: read
