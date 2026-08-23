@@ -1,5 +1,6 @@
 import * as fs from "fs";
 import * as path from "path";
+import pc from "picocolors";
 
 export type Schema = any;
 
@@ -93,7 +94,7 @@ async function loadLocalSchema(filePath: string): Promise<SchemaDefinition[]> {
 }
 
 async function fetchSchema(url: string): Promise<SchemaDefinition[]> {
-  console.log(`Downloading ${url}...`);
+  console.log(pc.gray(`Downloading ${url}...`));
 
   const response = await fetch(url);
   if (!response.ok) throw new Error(`Failed to fetch schema ${url}: ${response.statusText}`);

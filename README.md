@@ -57,18 +57,19 @@ npm run bundle
 The bundled script can be executed directly.
 
 ```bash
-./bundle/index.js -i <path> -s <schema>
+./bundle/agama-doc-validator.js -i <path> -s <schema>
 ```
 
 ### CLI Options
 
-| Option | Long Option      | Description                                                                                          |
-| :----- | :--------------- | :--------------------------------------------------------------------------------------------------- |
-| `-i`   | `--input <path>` | Path to a single DocBook XML file or a directory to scan recursively. Default: the current directory |
-| `-s`   | `--schema <ref>` | Path, URL, or predefined alias (Git branch) to the target JSON Schema. Default: "latest"             |
-| `-v`   | `--verbose`      | Print out every file being processed and detailed results.                                           |
-| `-a`   | `--all`          | Process all `<screen>` blocks in the documents, guess which might be JSON and validate them.         |
-| `-h`   | `--help`         | Display usage information and exit.                                                                  |
+| Option | Long Option      | Description                                                                                                    |
+| :----- | :--------------- | :------------------------------------------------------------------------------------------------------------- |
+| `-i`   | `--input <path>` | Path to a single DocBook XML file or a directory to scan recursively. Default: the current directory           |
+| `-s`   | `--schema <ref>` | Path, URL, or predefined alias (Git branch) to the target JSON Schema. Default: "latest"                       |
+| `-v`   | `--verbose`      | Print out every file being processed and detailed results.                                                     |
+| `-a`   | `--all`          | Process all `<screen>` blocks in the documents, guess which might be JSON and validate them.                   |
+| `-m`   | `--missing`      | Scan for missing `language="agama-json"` attribute in `<screen>` blocks which validate against the JSON schema |
+| `-h`   | `--help`         | Display usage information and exit.                                                                            |
 
 ### Schema Aliases
 
@@ -79,6 +80,39 @@ The tool comes with predefined aliases for quick validation against official Aga
 - `SLE-16.0` : Fetches the Agama profile for the SLE-16.0 and openSUSE Leap 16.0 product
 
 Other aliases are mapped to the Agama GitHub repository branches.
+
+## GitHub Action
+
+The repository contains also a GitHub Action so it can be used as a CI check in pull requests.
+
+Example usage:
+
+```yaml
+name: Validate Documentation
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate-xml:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v7
+
+      - name: Run Agama JSON Validator
+        uses: lslezak/agama-doc-validator@v1
+        with:
+          path: "."
+          schema: "latest"
+          verbose: "true"
+```
+
+See the [action.yml](action.yml) file for more details.
 
 ## Development
 

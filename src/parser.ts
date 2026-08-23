@@ -6,6 +6,7 @@ export interface ScreenSnippet {
   file: string;
   line: number;
   text: string;
+  language?: string;
 }
 
 export function extractScreenSnippets(filePath: string, all: boolean = false): ScreenSnippet[] {
@@ -17,14 +18,17 @@ export function extractScreenSnippets(filePath: string, all: boolean = false): S
   let inScreen = false;
   let currentText = "";
   let startLine = 0;
+  let currentLanguage: string | undefined = undefined;
 
   parser.onopentag = (node) => {
     if (node.name === "screen") {
-      const isAgamaJson = (node.attributes as any)?.language === "agama-json";
+      const lang = (node.attributes as any)?.language;
+      const isAgamaJson = lang === "agama-json";
       if (all || isAgamaJson) {
         inScreen = true;
         currentText = "";
         startLine = parser.line;
+        currentLanguage = lang;
       }
     }
   };
@@ -44,7 +48,8 @@ export function extractScreenSnippets(filePath: string, all: boolean = false): S
       snippets.push({
         file: filePath,
         line: startLine + 1, // sax parser lines are 0-indexed
-        text: currentText
+        text: currentText,
+        language: currentLanguage
       });
     }
   };

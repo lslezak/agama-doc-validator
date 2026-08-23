@@ -23,9 +23,19 @@ program
     "-a, --all",
     'scan and validate all <screen> tags (by default, only tags with language="agama-json" are validated)'
   )
+  .option(
+    "-m, --missing",
+    'scan <screen> tags without language="agama-json" and report if they contain valid JSON profiles'
+  )
   .action(async (options) => {
     try {
-      await runValidator(options.input, options.schema, options.verbose, options.all);
+      await runValidator(
+        options.input,
+        options.schema,
+        options.verbose,
+        options.all,
+        options.missing
+      );
     } catch (error: any) {
       if (options.verbose) console.log(error);
       console.error(pc.red(`\nFatal Error: ${error.message}`));
