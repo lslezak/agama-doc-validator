@@ -8,7 +8,7 @@ import { runValidator } from "./runner.js";
 export async function run(): Promise<void> {
   try {
     return runValidator(
-      core.getInput("input"),
+      core.getInput("path"),
       core.getInput("schema"),
       core.getBooleanInput("verbose")
     );
