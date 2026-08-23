@@ -48,3 +48,6 @@ jobs:
 
       - name: Run the Action
         uses: ./
+        with:
+          verbose: true
+          path: tests/data/minimal-test.xml

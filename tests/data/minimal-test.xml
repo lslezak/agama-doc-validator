@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic [
+  <!ENTITY % entities SYSTEM "../common/generic-entities.ent">
+  <!ENTITY prompt.sudo "sudo ">
+]>
+<topic xml:id="minimal-test"
+ xmlns="http://docbook.org/ns/docbook" version="5.2">
+  <title>Agama Validator Minimal Test Document</title>
+
+  <section xml:id="standard-json-case">
+    <title>Case 1: Standard JSON Profile</title>
+    <para>This block represents a standard, complete JSON schema-compliant payload.</para>
+    <screen language="agama-json">
+{
+  "product": {
+    "id": "SLES"
+  }
+}
+    </screen>
+  </section>
+
+  <section xml:id="json-fragment-case">
+    <title>Case 2: JSON Fragment</title>
+    <para>This block represents a JSON fragment. The heuristics engine should wrap it in braces.</para>
+    <screen language="agama-json">
+"hostname": {
+  "static": "test-host"
+}
+    </screen>
+  </section>
+
+  <section xml:id="untagged-json-case">
+    <title>Case 3: JSON without Language Attribute</title>
+    <para>This block contains valid JSON but is untagged. It should only be scanned when --all is enabled.</para>
+    <screen>
+{
+  "l10n": {
+    "locale": "en_US.UTF-8"
+  }
+}
+    </screen>
+  </section>
+
+  <section xml:id="shell-command-case">
+    <title>Case 4: Shell Command (Should be Ignored)</title>
+    <para>This block contains a standard shell command. The heuristics engine must ignore this.</para>
+    <screen>
+&prompt.sudo;<command>agama config show</command>
+    </screen>
+  </section>
+</topic>
