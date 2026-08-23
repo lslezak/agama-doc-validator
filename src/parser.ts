@@ -1,5 +1,5 @@
 import * as fs from "fs";
-import * as sax from "sax";
+import sax from "sax";
 import pc from "picocolors";
 
 export interface ScreenSnippet {
