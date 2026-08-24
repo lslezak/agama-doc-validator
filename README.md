@@ -123,3 +123,10 @@ content of the `dist/` directory, simply run `npm run package`.
 
 To ensure you do not forget doing this the `npm install` call installs a Git pre-push hook which
 checks that everything is OK.
+
+### Links
+
+- [Creating a JavaScript Action](https://docs.github.com/en/actions/tutorials/create-actions/create-a-javascript-action)
+- [Template for a TypeScript Action](https://github.com/actions/typescript-action)
+- [Actions Toolkit library](https://github.com/actions/toolkit/)
+- [Example actions/checkout](https://github.com/actions/checkout)
