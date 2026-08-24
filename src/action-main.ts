@@ -7,10 +7,16 @@ import { runValidator } from "./runner.js";
  */
 export async function run(): Promise<void> {
   try {
+    const mode = core.getInput("mode");
+    const all = mode === "all";
+    const missing = mode === "missing";
+
     return runValidator(
       core.getInput("path"),
       core.getInput("schema"),
-      core.getBooleanInput("verbose")
+      core.getBooleanInput("verbose"),
+      all,
+      missing
     );
   } catch (error: any) {
     core.setFailed(error.message);

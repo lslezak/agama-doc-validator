@@ -4,6 +4,14 @@ description:
   them against the Agama JSON schema.
 
 inputs:
+  mode:
+    description:
+      'Set the validator mode. Supported values: ''normal'' - validate the <screen> JSON snippets
+      marked with `language="agama-json"` attribute, ''all'' - validate all <screen> blocks which
+      look like a JSON, ''missing'' - report <screen> blocks which do not set language attribute,
+      but validate against the Agama JSON schema.'
+    default: normal
+
   path:
     description:
       Path to the documentation file. If a directory is used all XML files in the directory and
