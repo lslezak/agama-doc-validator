@@ -6,11 +6,11 @@ description:
 inputs:
   mode:
     description:
-      'Set the validator mode. Supported values: ''normal'' - validate the <screen> JSON snippets
+      'Set the validator mode. Supported values: ''validate'' - validate the <screen> JSON snippets
       marked with `language="agama-json"` attribute, ''all'' - validate all <screen> blocks which
       look like a JSON, ''missing'' - report <screen> blocks which do not set language attribute,
       but validate against the Agama JSON schema.'
-    default: normal
+    default: validate
 
   path:
     description:

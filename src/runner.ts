@@ -46,7 +46,7 @@ export async function runValidator(
   const errors: string[] = [];
 
   for (const file of xmlFiles) {
-    console.log(pc.gray(`Processing ${file}...`));
+    if (verbose) console.log(pc.gray(`Processing ${file}...`));
     const snippets = extractScreenSnippets(file, all || missing);
     totalScreens += snippets.length;
 
