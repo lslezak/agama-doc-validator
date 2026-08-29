@@ -2,8 +2,8 @@
  * @fileoverview Utility functions for finding XML files and loading/fetching JSON schemas.
  */
 
-import * as fs from "fs";
-import * as path from "path";
+import fs from "node:fs";
+import path from "node:path";
 import pc from "picocolors";
 
 export type Schema = any;

@@ -2,7 +2,7 @@
  * @fileoverview Extracts XML `<screen>` snippets from DocBook files using a SAX parser.
  */
 
-import * as fs from "fs";
+import fs from "node:fs";
 import sax from "sax";
 import pc from "picocolors";
 
