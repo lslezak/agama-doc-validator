@@ -43,6 +43,15 @@ jobs:
       - name: Unit Tests
         run: npm test
 
+      - name: Run the validator
+        run: npm start -- -i tests/data
+
+      - name: Build the validator
+        run: npm run bundle
+
+      - name: Run the compiled validator
+        run: ./bundle/agama-doc-validator.js -i tests/data
+
   test-action:
     name: Run this GitHub Action
     runs-on: ubuntu-latest
