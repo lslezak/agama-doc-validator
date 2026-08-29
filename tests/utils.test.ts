@@ -1,4 +1,4 @@
-import { describe, it, mock, afterEach } from "node:test";
+import { describe, it, mock, afterEach, beforeEach } from "node:test";
 import * as assert from "node:assert";
 import fs from "node:fs";
 import { findXmlFiles, loadSchema } from "../src/utils.js";
@@ -50,8 +50,10 @@ describe("Utils", () => {
   });
 
   describe("loadSchema", () => {
-    // Mute console.log to avoid spamming the test output during fetchSchema
-    mock.method(console, "log", () => {});
+    beforeEach(() => {
+      // Mute console.log to avoid spamming the test output during fetchSchema
+      mock.method(console, "log", () => {});
+    });
 
     it("should load a local schema and resolve references", async () => {
       mock.method(fs, "existsSync", () => true);
