@@ -7,17 +7,16 @@ The **Agama Doc Validator** is a CLI tool designed to scan DocBook XML files, au
 JSON snippets within `<screen>` tags, and validate them against an Agama Profile JSON Schema.
 
 This tool is particularly useful for ensuring that documentation examples containing Agama profiles
-are syntactically correct and adhere to the latest schema definitions.
+are syntactically correct and adhere to the schema definitions.
 
 ## Features
 
-- **Fast SAX Parsing**: Safely extracts `<screen>` content from DocBook XML files without crashing
-  on unexpanded entities.
-- **Smart Heuristics Engine**: Automatically detects if a snippet inside a `<screen>` tag is a JSON
-  object or array. It even handles partial JSON fragments.
+- **Fast SAX Parsing**: Safely extracts `<screen>` content from DocBook XML files.
+- **Heuristics Engine**: Automatically detects if a snippet inside a `<screen>` tag is a JSON
+  object or array, handles also partial JSON fragments.
 - **Schema Validation**: Validates the extracted JSON against a provided JSON Schema (supports local
   files, URLs, or predefined aliases).
-- **Clear Reporting**: Outputs detailed file names, line numbers, and exact validation errors.
+- **Reporting**: Outputs detailed file names, line numbers, and exact validation errors.
 
 ## Prerequisites
 
@@ -106,10 +105,6 @@ jobs:
 
       - name: Run Agama JSON Validator
         uses: lslezak/agama-doc-validator@v1
-        with:
-          path: "."
-          schema: "latest"
-          verbose: "true"
 ```
 
 See the [action.yml](action.yml) file for more details.
