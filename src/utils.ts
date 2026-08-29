@@ -1,15 +1,27 @@
+/**
+ * @fileoverview Utility functions for finding XML files and loading/fetching JSON schemas.
+ */
+
 import * as fs from "fs";
 import * as path from "path";
 import pc from "picocolors";
 
 export type Schema = any;
 
+/**
+ * Represents a loaded JSON schema definition and its URI.
+ */
 export interface SchemaDefinition {
   uri: string;
   schema: Schema;
 }
 
-// find the XML files recursively
+/**
+ * Recursively finds all `.xml` files in a directory, or returns the file if a single file is provided.
+ *
+ * @param {string} dirOrFile - The path to a directory or a single XML file.
+ * @returns {string[]} An array of absolute paths to the found XML files.
+ */
 export function findXmlFiles(dirOrFile: string): string[] {
   const absolutePath = path.resolve(dirOrFile);
   const stats = fs.statSync(absolutePath);
@@ -37,6 +49,12 @@ const ALIASES: Record<string, string> = {
     "https://raw.githubusercontent.com/agama-project/agama/refs/heads/SLE-16/rust/agama-lib/share/profile.schema.json"
 };
 
+/**
+ * Loads a JSON schema from a URL, local file path, or predefined alias.
+ *
+ * @param {string} schemaRef - The schema reference (URL, file path, or alias).
+ * @returns {Promise<SchemaDefinition[]>} A promise resolving to an array of schema definitions.
+ */
 export async function loadSchema(schemaRef: string): Promise<SchemaDefinition[]> {
   // explicit URL
   if (schemaRef.startsWith("http://") || schemaRef.startsWith("https://")) {
@@ -55,6 +73,12 @@ export async function loadSchema(schemaRef: string): Promise<SchemaDefinition[]>
   }
 }
 
+/**
+ * Loads a JSON schema from a local file and recursively fetches referenced schemas.
+ *
+ * @param {string} filePath - The local file path to the schema.
+ * @returns {Promise<SchemaDefinition[]>} A promise resolving to an array of schema definitions.
+ */
 async function loadLocalSchema(filePath: string): Promise<SchemaDefinition[]> {
   const absolutePath = path.resolve(filePath);
   const content = fs.readFileSync(absolutePath, "utf-8");
@@ -93,6 +117,12 @@ async function loadLocalSchema(filePath: string): Promise<SchemaDefinition[]> {
   return result;
 }
 
+/**
+ * Fetches a JSON schema from a URL and recursively fetches referenced schemas.
+ *
+ * @param {string} url - The URL of the schema to download.
+ * @returns {Promise<SchemaDefinition[]>} A promise resolving to an array of schema definitions.
+ */
 async function fetchSchema(url: string): Promise<SchemaDefinition[]> {
   console.log(pc.gray(`Downloading ${url}...`));
 

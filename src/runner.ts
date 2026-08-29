@@ -1,9 +1,19 @@
+/**
+ * @fileoverview Main execution runner that glues parsing, heuristics, and validation together.
+ */
+
 import pc from "picocolors";
 import { findXmlFiles, loadSchema } from "./utils.js";
 import { extractScreenSnippets } from "./parser.js";
 import { analyzeSnippet } from "./heuristics.js";
 import { Validator } from "./validator.js";
 
+/**
+ * Formats snippet text by indenting it for console output.
+ *
+ * @param {string} text - The raw snippet text.
+ * @returns {string} The formatted and indented text.
+ */
 function formatSnippetText(text: string): string {
   return text
     .split("\n")
@@ -11,6 +21,15 @@ function formatSnippetText(text: string): string {
     .join("\n");
 }
 
+/**
+ * Runs the full validation process against the provided input path and schema reference.
+ *
+ * @param {string} input - The path to the DocBook XML file or directory to scan.
+ * @param {string} schemaRef - The schema reference (URL, file path, or alias).
+ * @param {boolean} verbose - Whether to print detailed information during processing.
+ * @param {boolean} [all=false] - Whether to scan all `<screen>` tags instead of only `agama-json`.
+ * @param {boolean} [missing=false] - Whether to scan untagged screens and report missing `language="agama-json"` attributes.
+ */
 export async function runValidator(
   input: string,
   schemaRef: string,

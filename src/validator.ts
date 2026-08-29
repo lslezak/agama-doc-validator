@@ -1,13 +1,25 @@
+/**
+ * @fileoverview JSON schema validation wrapper using Ajv and better-ajv-errors.
+ */
+
 import { Ajv } from "ajv";
 import { betterAjvErrors } from "@apideck/better-ajv-errors";
 
 import { SchemaDefinition } from "./utils.js";
 
+/**
+ * Wrapper class for validating JSON data against a compiled Ajv schema.
+ */
 export class Validator {
   private ajv: Ajv;
   private validateFn: any;
   private schema: any;
 
+  /**
+   * Initializes a new Validator instance with the provided schema definitions.
+   *
+   * @param {SchemaDefinition[]} schema - An array of schema definitions, where the first is the main schema.
+   */
   constructor(schema: SchemaDefinition[]) {
     this.ajv = new Ajv({ allErrors: true, strict: false });
 
@@ -27,6 +39,12 @@ export class Validator {
     }
   }
 
+  /**
+   * Validates data against the compiled schema and returns an array of error messages.
+   *
+   * @param {any} data - The JSON data to validate.
+   * @returns {string[]} An array of human-readable error messages, or an empty array if valid.
+   */
   validate(data: any): string[] {
     const valid = this.validateFn(data);
     if (valid) return [];

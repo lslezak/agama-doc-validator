@@ -1,7 +1,14 @@
+/**
+ * @fileoverview Extracts XML `<screen>` snippets from DocBook files using a SAX parser.
+ */
+
 import * as fs from "fs";
 import sax from "sax";
 import pc from "picocolors";
 
+/**
+ * Represents an extracted snippet from a `<screen>` tag.
+ */
 export interface ScreenSnippet {
   file: string;
   line: number;
@@ -9,6 +16,13 @@ export interface ScreenSnippet {
   language?: string;
 }
 
+/**
+ * Extracts the text content of `<screen>` tags from a given XML file.
+ *
+ * @param {string} filePath - The path to the XML file to parse.
+ * @param {boolean} [all=false] - If true, extracts all `<screen>` tags regardless of the language attribute.
+ * @returns {ScreenSnippet[]} An array of extracted screen snippets.
+ */
 export function extractScreenSnippets(filePath: string, all: boolean = false): ScreenSnippet[] {
   const snippets: ScreenSnippet[] = [];
   const content = fs.readFileSync(filePath, "utf-8");

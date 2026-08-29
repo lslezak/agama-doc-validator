@@ -12,8 +12,8 @@ are syntactically correct and adhere to the schema definitions.
 ## Features
 
 - **Fast SAX Parsing**: Safely extracts `<screen>` content from DocBook XML files.
-- **Heuristics Engine**: Automatically detects if a snippet inside a `<screen>` tag is a JSON
-  object or array, handles also partial JSON fragments.
+- **Heuristics Engine**: Automatically detects if a snippet inside a `<screen>` tag is a JSON object
+  or array, handles also partial JSON fragments.
 - **Schema Validation**: Validates the extracted JSON against a provided JSON Schema (supports local
   files, URLs, or predefined aliases).
 - **Reporting**: Outputs detailed file names, line numbers, and exact validation errors.
@@ -103,8 +103,15 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v7
 
+      # this validates all <screen language="agama-json"> blocks in the documents
       - name: Run Agama JSON Validator
         uses: lslezak/agama-doc-validator@v1
+
+      # this validates all <screen> blocks without "language=" attribute
+      - name: Run Agama JSON Validator
+        uses: lslezak/agama-doc-validator@v1
+        with:
+          mode: missing
 ```
 
 See the [action.yml](action.yml) file for more details.

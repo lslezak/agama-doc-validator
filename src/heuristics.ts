@@ -1,9 +1,24 @@
+/**
+ * @fileoverview Heuristics engine to determine if a text snippet represents a JSON payload.
+ */
+
+/**
+ * The result of the heuristic analysis.
+ */
 export interface HeuristicsResult {
   isJson: boolean;
   parsed?: any;
   error?: string;
 }
 
+/**
+ * Analyzes a given text snippet to detect if it's JSON, and attempts to parse it if so.
+ * JSON fragments are automatically wrapped in curly braces to form valid objects.
+ *
+ * @param {string} text - The text snippet to analyze.
+ * @param {boolean} [forceJson=false] - If true, bypasses exclusion checks and forces JSON evaluation.
+ * @returns {HeuristicsResult} The result of the heuristic analysis including parsed data or errors.
+ */
 export function analyzeSnippet(text: string, forceJson: boolean = false): HeuristicsResult {
   // remove the "..." placeholders
   let trimmed = text.trim().replaceAll("...", "");

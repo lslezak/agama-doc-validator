@@ -1,9 +1,14 @@
+/**
+ * @fileoverview Main logic for the GitHub Action wrapper.
+ */
+
 import * as core from "@actions/core";
 import { runValidator } from "./runner.js";
 
 /**
- * This file is the actual logic of the action
- * @returns {Promise<void>} Resolves when the action is complete
+ * Executes the GitHub Action logic by reading inputs and running the validator.
+ *
+ * @returns {Promise<void>} Resolves when the action is complete.
  */
 export async function run(): Promise<void> {
   try {

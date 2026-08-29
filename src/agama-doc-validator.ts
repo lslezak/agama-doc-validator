@@ -1,5 +1,9 @@
 #!/usr/bin/env node
 
+/**
+ * @fileoverview CLI entry point for the Agama DocBook JSON Validator.
+ */
+
 import { Command } from "commander";
 import { runValidator } from "./runner.js";
 import pc from "picocolors";
