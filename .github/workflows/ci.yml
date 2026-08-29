@@ -42,6 +42,8 @@ jobs:
 
       - name: Unit Tests
         run: npm test
+        env:
+          FORCE_COLOR: 1
 
       - name: Run the validator
         run: npm start -- -i tests/data
